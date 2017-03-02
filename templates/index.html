@@ -1,31 +1,77 @@
 {% extends "base.html" %}
 {% block leftbar %}
-                <div class="well">
-                    <ol class="breadcrumb">
-                        <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
-                        <li><a href="/tag/{{ dataPool.get_tags()[0] }}">{{ dataPool.get_tags()[0] }}</a></li>
-                        <li><a href="/date/{{ dataPool.created_date }}">{{ dataPool.created_date }}</a></li>
-                    </ol>
-                    <div id="article">
-                        <div class="article-title text-center">
-                            <h2>{{ dataPool.title }}</h2>
-                        </div>
+<div id="tool" class="well alert clearfix fade in">
+    <div class="tags">
+        <span class="close" data-dismiss="alert">&times;</span>
+        <div class="tag-list" style="float:left">
 
-                        <div class="article-tags">
-                            {% for tag in dataPool.get_tags() %}
-                                <a href="/tag/{{ tag }}" class="pull-right">
-                                    <span class="label label-primary">{{ tag }}</span>
+            <label class="active">
+                全部
+                <input name="category" value="all" style="display:none" type="radio">
+            </label>
+
+            <label class="">
+                linux
+                <input name="category" value="linux" style="display:none" type="radio">
+            </label>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="well alert fade in">
+    <div id="all-post-list">
+
+        {% for i in dataPool %}
+            <div id="div{{ i.id }}" class="all-post clearfix fade in underline">
+                <span class="close" data-toggle="alert" data-dismiss="alert" data-target="#div{{ i.id }}">&times;</span>
+                <div class="post-title clearfix">
+                    <a href="">
+                        <div class="pre-cat">
+                            <div class="pre-catinner btn">django</div>
+                            <div class="pre-catarrow"></div>
+                        </div>
+                    </a>
+                    <h1><a href="/page/{{ i.id }}">{{ i.title }}</a></h1>
+                    <div class="post-tags" style="float: right">
+                        {% for j in i.get_tags()%}
+                            <a href="/tag/{{ j }}">
+                                <span class="label label-primary btn">{{ j }}</span>
+                            </a>
+                        {% end %}
+                    </div>
+                </div>
+                <div class="post-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <figure class="thumbnail">
+                                <a href="/page/{{ i.id }}">
+                                    <img class="img-responsive" src="/static/img/linux.jpg" />
                                 </a>
-                            {% end %}
+                            </figure>
                         </div>
-
-                        <hr>
-                        <div class="article-content">
-                            {% raw dataPool.content %}
+                        <div class="col-sm-8">
+                            <p></p>
+                            <p>{{ i.summary }}</p>
                         </div>
                     </div>
                 </div>
+                <div class="post-info">
+                    <span><span class="glyphicon glyphicon-user"></span> {{ i.author }}</span>
+                    <span><span class="glyphicon glyphicon-calendar"></span> {{ i.created_date }}</span>
+
+                    <span></span>
+                </div>
+            </div>
+        {% end %}
+    </div>
+    <span class="close" data-dismiss="alert">&times;</span>
+</div>
 {% end %}
+
+
+
 {% block rightbar %}
 <div id="vmaig-hotest-posts">
     <div class="panel panel-vmaig">

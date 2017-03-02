@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/dict.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/dict.css">
 
 </head>
 <body>
@@ -17,14 +17,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">No Blog</a>
+            <a class="navbar-brand" href="/" >No Blog</a>
         </div>
 
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="#">首页</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="/"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
+            <li><a href="/tag/linux">linux</a></li>
+            <li><a href="/tag/python">python</a></li>
+            <li><a href="/tag/docker">docker</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -37,17 +38,31 @@
             </li>
         </ul>
 
-        <form class="navbar-form navbar-right">
-            <input class="form-control" placeholder="Search..." type="text">
+        <form class="navbar-form form-inline pull-right">
+            <div class="form-group">
+                <label for="search"></label>
+                <div class="input-group">
+                    <input id="search" class="form-control" placeholder="Search..." type="text">
+
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+
+
+                </div>
+            </div>
+
         </form>
 
     </div>
   </div>
 </header>
+
 <div id="vmaig-main">
     <div id="vmaig-content" class="container">
         <div class="row">
             <div class="col-md-8 col-lg-9">
+                {% block leftbar %}
                 <div id="tool" class="well alert clearfix fade in">
                     <div class="tags">
                         <span class="close" data-dismiss="alert">&times;</span>
@@ -94,7 +109,7 @@
                                     <div class="col-sm-4">
                                         <figure class="thumbnail">
                                             <a href="">
-                                                <img class="img-responsive" src="../static/img/linux-article.jpg" />
+                                                <img class="img-responsive" src="../static/img/python.jpg" />
                                             </a>
                                         </figure>
                                     </div>
@@ -135,7 +150,7 @@
                                     <div class="col-sm-4">
                                         <figure class="thumbnail">
                                             <a href="">
-                                                <img class="img-responsive" src="../static/img/linux-article.jpg" />
+                                                <img class="img-responsive" src="/static/img/python.jpg" />
                                             </a>
                                         </figure>
                                     </div>
@@ -176,7 +191,7 @@
                                     <div class="col-sm-4">
                                         <figure class="thumbnail">
                                             <a href="">
-                                                <img class="img-responsive" src="../static/img/linux-article.jpg" />
+                                                <img class="img-responsive" src="/static/img/python.jpg" />
                                             </a>
                                         </figure>
                                     </div>
@@ -196,12 +211,12 @@
                     </div>
                     <span class="close" data-dismiss="alert">&times;</span>
                 </div>
-
+                {% end %}
             </div>
 
             <div class="col-md-4 col-lg-3 hidden-xs">
 
-
+                {% block rightbar %}
                 <div id="vmaig-hotest-posts">
                     <div class="panel panel-vmaig">
                         <div class="panel-heading">
@@ -215,27 +230,28 @@
                         <ul id="hotest-post-list" class="list-group collapse in">
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/vmaig_blog.html">本网站开源喽~~基于Django，Bootstrap</a> </span>
+                                <span class="hotest-post-title"><a href="">tornado，Bootstrap</a> </span>
                                 <span class="badge">7307</span>
                                 </li>
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/OllyDbg_use_study_01.html">OllyDbg 使用教程 （一）</a> </span>
+                                <span class="hotest-post-title"><a href="">docker网络基础</a> </span>
                                 <span class="badge">4057</span>
                                 </li>
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">namespace cgroups</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">docker kubernetes</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">汇编简单入门教程（一）</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
+
 
                         </ul>
                     </div>
@@ -255,25 +271,25 @@
                         <ul id="newest-post-list" class="list-group collapse in">
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/vmaig_blog.html">本网站开源喽~~基于Django，Bootstrap</a> </span>
+                                <span class="hotest-post-title"><a href="">tornado，Bootstrap</a> </span>
                                 <span class="badge">7307</span>
                                 </li>
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/OllyDbg_use_study_01.html">OllyDbg 使用教程 （一）</a> </span>
+                                <span class="hotest-post-title"><a href="">docker网络基础</a> </span>
                                 <span class="badge">4057</span>
                                 </li>
 
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">namespace cgroups</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">docker kubernetes</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
                                 <li class="list-group-item">
-                                <span class="hotest-post-title"><a href="/article/ASM_simple_study_01.html">汇编简单入门教程（一）基础知识、寄存器</a> </span>
+                                <span class="hotest-post-title"><a href="">汇编简单入门教程（一）</a> </span>
                                 <span class="badge">3798</span>
                                 </li>
 
@@ -297,41 +313,45 @@
 
                             <canvas id="myCanvas" width="263" height="263">
                                 <ul>
-                                    <li><a href="base.html">Google</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Fish</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Chips</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Salt</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Vinegar</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Fish</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Chips</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Salt</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Vinegar</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Fish</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Chips</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Salt</a></li>
-                                    <li><a href="http://sc.chinaz.com/">Vinegar</a></li>
+                                    <li><a href="">linux</a></li>
+                                    <li><a href="">docker</a></li>
+                                    <li><a href="">python</a></li>
+                                    <li><a href="">html</a></li>
+                                    <li><a href="">云计算</a></li>
+                                    <li><a href="">数据库</a></li>
+                                    <li><a href="">python</a></li>
+                                    <li><a href="">html</a></li>
+                                    <li><a href="">云计算</a></li>
+                                    <li><a href="">javascript</a></li>
+                                    <li><a href="">bootstrap</a></li>
+                                    <li><a href="">linux</a></li>
+                                    <li><a href="">docker</a></li>
+                                    <li><a href="">数据库</a></li>
+                                    <li><a href="">javascript</a></li>
+                                    <li><a href="">bootstrap</a></li>
+
                                 </ul>
                             </canvas>
 
                         </ul>
                     </div>
                 </div>
-
+                {% end %}
 
             </div>
         </div>
 
     </div>
-    <footer></footer>
+    <footer><span class="close" data-dismiss="alert"></span></footer>
 </div>
 
 
 
-<script src="../static/js/jquery.min.js"></script>
-<script src="../static/js/bootstrap.min.js"></script>
-<script src="../static/js/vmaig.js"></script>
-<script src="../static/js/excanvas.js"></script>
-<script src="../static/js/jquery.tagcanvas.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/vmaig.js"></script>
+<script src="/static/js/excanvas.js"></script>
+<script src="/static/js/jquery.tagcanvas.js"></script>
 
 <script type="text/javascript">
 

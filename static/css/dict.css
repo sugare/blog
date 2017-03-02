@@ -10,7 +10,7 @@ body {
 
 /* Firefox */
 @-moz-document url-prefix() {
-body { font-size: 12px; }
+/*body { font-size: 12px; }*/
 }
 /* Safari */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -37,8 +37,16 @@ header {
     padding: 10px;
     padding-bottom: 30px;  /* 不至被footer盖住 */
 }
+.navbar-brand {
+    font-weight: bold;
+    font-size: 30px;
+}
 
 
+#navbar ul li a {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 footer {
     position: absolute;
@@ -206,13 +214,6 @@ a:hover{
     margin-right:10px;
 }
 
-#div1 {
-    position:relative;
-    background-color: #fff;
-    margin-bottom: 20px;
-    width: 200px;
-    height: 200px;
-}
 .panel-vmaig{
     box-shadow: 0 0 5px #C2C2C2;
     border-color:#EEE;
