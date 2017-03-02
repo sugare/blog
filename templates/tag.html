@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block leftbar %}
+<div class="well alert fade in">
+    <div id="all-post-list">
+
+        {% for i in tagDataPool %}
+            <div id="div{{ i.id }}" class="all-post clearfix fade in underline">
+                <span class="close" data-toggle="alert" data-dismiss="alert" data-target="#div{{ i.id }}">&times;</span>
+                <div class="post-title clearfix">
+                    <a href="">
+                        <div class="pre-cat">
+                            <div class="pre-catinner btn">django</div>
+                            <div class="pre-catarrow"></div>
+                        </div>
+                    </a>
+                    <h1><a href="/page/{{ i.id }}">{{ i.title }}</a></h1>
+                    <div class="post-tags" style="float: right">
+                        {% for j in i.get_tags()%}
+                            <a href="/tag/{{ j }}">
+                                <span class="label label-primary btn">{{ j }}</span>
+                            </a>
+                        {% end %}
+                    </div>
+                </div>
+                <div class="post-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <figure class="thumbnail">
+                                <a href="/page/{{ i.id }}">
+                                    <img class="img-responsive" src="/static/img/linux.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-sm-8">
+                            <p></p>
+                            <p>{{ i.summary }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-info">
+                    <span><span class="glyphicon glyphicon-user"></span> {{ i.author }}</span>
+                    <span><span class="glyphicon glyphicon-calendar"></span> {{ i.created_date }}</span>
+
+                    <span></span>
+                </div>
+            </div>
+        {% end %}
+    </div>
+    <span class="close" data-dismiss="alert">&times;</span>
+</div>
+{% end %}
+
+
+
+{% block rightbar %}
+<div id="vmaig-hotest-posts">
+    <div class="panel panel-vmaig">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-fire"></span>
+                热门文章
+                <span class="glyphicon glyphicon-remove btn panel-close pull-right"></span>
+                <span class="glyphicon glyphicon-chevron-up btn panel-collapse pull-right" data-toggle="collapse" data-target="#hotest-post-list"></span>
+            </h3>
+        </div>
+        <ul id="hotest-post-list" class="list-group collapse in">
+            {% for i in rightbarHot %}
+                <li class="list-group-item">
+                <span class="hotest-post-title"><a href="/page/{{ i.id }}">{{ i.title }}</a> </span>
+                <span class="badge">{{ i.zan_times }}</span>
+                </li>
+            {% end %}
+        </ul>
+    </div>
+</div>
+
+
+<div id="vmaig-newest-posts">
+    <div class="panel panel-vmaig">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-calendar"></span>
+                博客档案
+                <span class="glyphicon glyphicon-remove btn panel-close pull-right"></span>
+                <span class="glyphicon glyphicon-chevron-up btn panel-collapse pull-right" data-toggle="collapse" data-target="#newest-post-list"></span>
+            </h3>
+        </div>
+        <ul id="newest-post-list" class="list-group collapse in">
+            {% for i in rightbarDate %}
+                <li class="list-group-item">
+                    <span class="hotest-post-title"><a href="/date/{{ i.created_date }}">{{ i.created_date }} ({{ i.count }})</a> </span>
+                </li>
+            {% end %}
+        </ul>
+    </div>
+</div>
+
+
+
+<div id="vmaig-tag-cloud">
+    <div class="panel panel-vmaig">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-refresh"></span>
+                旋转标签
+                <span class="glyphicon glyphicon-remove btn panel-close pull-right"></span>
+                <span class="glyphicon glyphicon-chevron-up btn panel-collapse pull-right" data-toggle="collapse" data-target="#tag-cloud-list"></span>
+            </h3>
+        </div>
+        <ul id="tag-cloud-list" class="list-group collapse in">
+
+            <canvas id="myCanvas" width="263" height="263">
+                <ul>
+                    <li><a href="/tag/linux">linux</a></li>
+                    <li><a href="/tag/docker">docker</a></li>
+                    <li><a href="/tag/python">python</a></li>
+                    <li><a href="/tag/html">html</a></li>
+                    <li><a href="/tag/cloud">云计算</a></li>
+                    <li><a href="/tag/database">数据库</a></li>
+                    <li><a href="/tag/python">python</a></li>
+                    <li><a href="/tag/html">html</a></li>
+                    <li><a href="/tag/cloud">云计算</a></li>
+                    <li><a href="/tag/javascript">javascript</a></li>
+                    <li><a href="/tag/bootstrap">bootstrap</a></li>
+                    <li><a href="/tag/linux">linux</a></li>
+                    <li><a href="/tag/docker">docker</a></li>
+                    <li><a href="/tag/database">数据库</a></li>
+                    <li><a href="/tag/javascript">javascript</a></li>
+                    <li><a href="/tag/bootstrap">bootstrap</a></li>
+
+                </ul>
+            </canvas>
+
+        </ul>
+    </div>
+</div>
+{% end %}

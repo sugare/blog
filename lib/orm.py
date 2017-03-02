@@ -67,9 +67,6 @@ def rightbarHot():
     return l
 
 
-
-
-
 def latest():
     data = (noblog.select(fn.MAX(noblog.id).alias('latest'))).get()
     return data.latest
@@ -80,6 +77,15 @@ def dateData(date):
     for i in sq.execute():
         l.append(i)
     return l
+
+def tagData(tag):
+    l = []
+    sq = noblog.select()
+    for i in sq.execute():
+        if tag in i.get_tags():
+            l.append(i)
+    return l
+
 
 def PagerTotalItem():
     l = []
@@ -128,10 +134,11 @@ html = '''
 
 
 if __name__ == '__main__':
-    #db.connect()
+    db.connect()
     # noblog.create(title='{}'.format('abc'), essay='{}'.format(MySQLdb.escape_string(html)))
-    for i in range(10):
-       noblog.create(title='{}'.format('信息系统运维的'), content='{}'.format(html), summary='{}'.format('我始终国人'), tags='linux,python')
+    print(tagData('python'))
+    #for i in range(10):
+    #   noblog.create(title='{}'.format('信息系统运维的'), content='{}'.format(html), summary='{}'.format('我始终国人'), tags='linux,python')
     #db.create_tables([noblog, ])
     #sq = SelectQuery(noblog, fn.Count(noblog.created_date).alias('count'))
     #sq = noblog.select().order_by(noblog.id.desc()).paginate(0,1)

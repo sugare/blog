@@ -12,7 +12,7 @@ import tornado.ioloop
 import tornado.httpserver
 import tornado.options
 import os
-from lib.orm import noblog,rightbarDate,rightbarHot,latest,dateData,PagerPerItem, PagerTotalItem, getData
+from lib.orm import noblog,rightbarDate,rightbarHot,latest,dateData,PagerPerItem, PagerTotalItem, getData, tagData
 
 
 from tornado.options import define, options
@@ -25,6 +25,7 @@ class Application(tornado.web.Application):
             (r'/?', IndexHandler),
             (r'/page/(\d+)/?', PageHandler),
             (r'/tag/([a-z]+$)', TagHandler),
+            (r'/date/(.*)/?', DateHandler),
             (r'/.*', ErrorHandler),
         ]
 
@@ -63,8 +64,11 @@ class PageHandler(BaseHandler):
 
 class TagHandler(BaseHandler):
     def get(self, tag):
-        self.write(tag)
+        self.render('tag.html', tagDataPool=tagData(tag),rightbarHot=rightbarHot(), rightbarDate=rightbarDate())
 
+class DateHandler(BaseHandler):
+    def get(self, date):
+        self.render('date.html', dateDataPool=dateData(date), rightbarHot=rightbarHot(), rightbarDate=rightbarDate())
 
 class ErrorHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
