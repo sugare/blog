@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/dict.css">
+    <title>Title</title>
+
+
+
+
+</head>
+<body>
+
+<button type="button" id="more" data-status="1">
+                加载更多
+</button>
+<input type="hidden" id="page" value="1">
+<div class="information"></div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/vmaig.js"></script>
+<script src="/static/js/excanvas.js"></script>
+<script src="/static/js/jquery.tagcanvas.js"></script>
+<script>
+
+    $(function () {
+       $("#more").click(function () {
+           var page = parseInt($("#page").val());
+           $(this).html("加载中...");
+           status=$(this).attr("data-status");
+           if(status==1) {
+               status = $(this).attr("data-status", "0");
+               $.ajax({
+                   type: "POST",
+                   url: "/",
+                   success: function (data) {
+                       alert(data);
+//                       data = data.data;
+//                       /*数据不够10条隐藏按钮*/
+//                       if (data.length < 10) {
+//                           $(this).hide()
+//                       } else {
+//                           $("#page").val(page + 1);//记录页码
+//                       }
+                       insertDiv(data);
+                   }
+               });
+           }
+
+       });
+   });
+       function insertDiv(data){
+           var information = $(".information");
+           var html = '';
+           for (var i = 0; i < data.length; i++) {
+               html +="<div>"+data[i].title+"</div>"+"<div>"+data[i].date+"</div>"
+           }
+           information.append(html);
+           $("#more").html("加载更多");
+           $("#more").attr("data-status","1");
+       };
+</script>
+</body>
+</html>

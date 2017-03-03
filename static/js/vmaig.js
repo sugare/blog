@@ -34,3 +34,71 @@ $(function() {
     }
     // your other jQuery stuff here...
 });
+
+$(function () {
+    $('#loadmore').bind('click', function () {
+        var page = parseInt($('#page').val());
+        $(this).html('加载中...');
+        status = $(this).attr("data-status");
+        if (status == 1) {
+            status = $(this).attr("data-status", "0");
+            $.ajax({
+                type : "POST",
+                url : "/",
+                data : "page=" + page,
+                success : function (data) {
+                    if (data == "1") {
+                        $('#loadmore').hide()
+                    } else {
+                        $('#page').val(page + 1);
+                        $('#all-post-list').append(data);
+                        console.log(page);
+                        $("#loadmore").html('加载更多... <span class="glyphicon glyphicon-arrow-down"></span>');
+                        $("#loadmore").attr("data-status", "1");
+                    }
+
+
+
+                }
+
+            });
+        }
+    });
+});
+
+$(function () {
+    $('[name="category"]').bind('click', function () {
+        var category = $(this).val();
+
+        $('#all-post-list').html('<div class="progress progress-striped active"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div></div>');
+        // $('#tag-list label').removeClass('active');
+        var pare = $(this).parent();
+        pare.addClass('active').siblings().removeClass('active');
+        // $(this).parent().addClass('active');
+        setTimeout(function () {
+            $.ajax({
+            type : "POST",
+            url : "/api",
+            data : "category=" + category,
+            success : function (data) {
+            // alert(data);
+            $('#all-post-list').html(data);
+            // if (data == "1") {
+            //     $('#loadmore').hide()
+            // } else {
+            //     $('#page').val(page + 1);
+            //     $('#all-post-list').append(data);
+            //     console.log(page);
+            //     $("#loadmore").html('加载更多... <span class="glyphicon glyphicon-arrow-down"></span>');
+            //     $("#loadmore").attr("data-status", "1");
+            // }
+            //
+
+
+            }
+
+            });
+        }, 500);
+
+    })
+});

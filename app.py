@@ -11,8 +11,10 @@ import tornado.web
 import tornado.ioloop
 import tornado.httpserver
 import tornado.options
+from tornado.escape import json_decode, json_encode
 import os
-from lib.orm import noblog,rightbarDate,rightbarHot,latest,dateData,PagerPerItem, PagerTotalItem, getData, tagData
+from lib.orm import noblog,rightbarDate,rightbarHot,latest,dateData,PagerPerItem, PagerTotalItem, getData, tagData, indexTag
+import json
 
 
 from tornado.options import define, options
@@ -26,6 +28,7 @@ class Application(tornado.web.Application):
             (r'/page/(\d+)/?', PageHandler),
             (r'/tag/([a-z]+$)', TagHandler),
             (r'/date/(.*)/?', DateHandler),
+            (r'/api/?', ApiHandler),
             (r'/.*', ErrorHandler),
         ]
 
@@ -51,8 +54,30 @@ class IndexHandler(BaseHandler):
         totalPage = totalItem // perPage if totalItem % perPage == 0 else totalItem // perPage + 1
 
         dataPool = PagerPerItem(1, perPage)
-        print(dataPool[1].get_tags())
-        self.render('index.html', dataPool=dataPool, rightbarHot=rightbarHot(), rightbarDate=rightbarDate())
+        self.render('index.html', dataPool=dataPool, indexTag=indexTag(), rightbarHot=rightbarHot(), rightbarDate=rightbarDate(),totalPage=totalPage)
+
+    def post(self):
+        perPage = 8
+        totalItem = PagerTotalItem()
+        totalPage = totalItem // perPage if totalItem % perPage == 0 else totalItem // perPage + 1
+        page = self.get_argument('page')
+        if int(page) > totalPage:
+            self.write('1')
+        else:
+            dataPool = PagerPerItem(int(page), perPage)
+            self.render('indexApi.html',dataPool=dataPool)
+
+class ApiHandler(BaseHandler):
+    def get(self, *args, **kwargs):
+        a = {'i1': 1, 'i2': PagerPerItem(1,8)}
+        self.write(json.dumps(a))
+
+    def post(self):
+        tag = self.get_argument('category')
+        if tag == 'all':
+            self.render('tagApi.html', tagDataPool=PagerPerItem(1, 8))
+        else:
+            self.render('tagApi.html',tagDataPool=tagData(tag))
 
 class PageHandler(BaseHandler):
     def get(self, blog_id):
@@ -65,6 +90,10 @@ class PageHandler(BaseHandler):
 class TagHandler(BaseHandler):
     def get(self, tag):
         self.render('tag.html', tagDataPool=tagData(tag),rightbarHot=rightbarHot(), rightbarDate=rightbarDate())
+
+    def post(self):
+        tag = self.get_argument('category')
+        self.render('tagApi.html',tagDataPool=tagData(tag))
 
 class DateHandler(BaseHandler):
     def get(self, date):

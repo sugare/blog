@@ -5,11 +5,11 @@
 
         {% for i in tagDataPool %}
             <div id="div{{ i.id }}" class="all-post clearfix fade in underline">
-                <span class="close" data-toggle="alert" data-dismiss="alert" data-target="#div{{ i.id }}">&times;</span>
+                <!--<span class="close" data-toggle="alert" data-dismiss="alert" data-target="#div{{ i.id }}">&times;</span>-->
                 <div class="post-title clearfix">
                     <a href="">
                         <div class="pre-cat">
-                            <div class="pre-catinner btn">django</div>
+                            <div class="pre-catinner btn">{{ i.get_tags()[0] }}</div>
                             <div class="pre-catarrow"></div>
                         </div>
                     </a>
