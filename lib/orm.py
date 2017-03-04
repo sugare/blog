@@ -62,8 +62,8 @@ def rightbarDate():
     l = []
     sq = noblog.select(noblog.created_date, fn.Count(noblog.created_date).alias('count')).group_by(noblog.created_date)
     for i in sq.execute():
-        l.append(i)
-
+        # l.append(i)
+        l.insert(0,i)
     return l
 
 def rightbarHot():

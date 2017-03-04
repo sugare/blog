@@ -71,9 +71,8 @@ $(function () {
         var category = $(this).val();
 
         $('#all-post-list').html('<div class="progress progress-striped active"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div></div>');
-        // $('#tag-list label').removeClass('active');
-        var pare = $(this).parent();
-        pare.addClass('active').siblings().removeClass('active');
+        var parent = $(this).parent();
+        parent.addClass('active').siblings().removeClass('active');
         // $(this).parent().addClass('active');
         setTimeout(function () {
             $.ajax({
@@ -81,24 +80,10 @@ $(function () {
             url : "/api",
             data : "category=" + category,
             success : function (data) {
-            // alert(data);
-            $('#all-post-list').html(data);
-            // if (data == "1") {
-            //     $('#loadmore').hide()
-            // } else {
-            //     $('#page').val(page + 1);
-            //     $('#all-post-list').append(data);
-            //     console.log(page);
-            //     $("#loadmore").html('加载更多... <span class="glyphicon glyphicon-arrow-down"></span>');
-            //     $("#loadmore").attr("data-status", "1");
-            // }
-            //
-
-
-            }
-
+                $('#all-post-list').html(data);
+                }
             });
-        }, 500);
+        }, 300);
 
     })
 });

@@ -1,0 +1,49 @@
+<div class="well">
+    <div id="all-post-list">
+
+        {% for i in dataPool %}
+            <div id="div{{ i.id }}" class="all-post clearfix fade in underline">
+                <div class="post-title clearfix">
+                    <a href="">
+                        <div class="pre-cat">
+                            <div class="pre-catinner btn">{{ i.get_tags()[0] }}</div>
+                            <div class="pre-catarrow"></div>
+                        </div>
+                    </a>
+                    <h1><a href="/page/{{ i.id }}">{{ i.title }}</a></h1>
+                    <div class="post-tags" style="float: right">
+                        {% for j in i.get_tags()%}
+                            <a href="/tag/{{ j }}">
+                                <span class="label label-primary btn">{{ j }}</span>
+                            </a>
+                        {% end %}
+                    </div>
+                </div>
+                <div class="post-content">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <figure class="thumbnail">
+                                <a href="/page/{{ i.id }}">
+                                    <img class="img-responsive" src="/static/img/index2.jpg" />
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-sm-8">
+                            <p></p>
+                            <p>{{ i.summary }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-info">
+                    <span><span class="glyphicon glyphicon-user"></span> {{ i.author }}</span>
+                    <span><span class="glyphicon glyphicon-calendar"></span> {{ i.created_date }}</span>
+
+                    <span></span>
+                </div>
+            </div>
+        {% end %}
+    </div>
+
+</div>
+<button id="loadmore" data-status=1 type="button" class="btn btn-primary" style="width:100%;display: block">加载更多... <span class="glyphicon glyphicon-arrow-down"></span></button>
+<input type="hidden" id="page" value="2">

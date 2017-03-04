@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/dict.css">
+    <link rel="stylesheet" href="{{ static_url('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ static_url('css/dict.css') }}">
+    <link rel="shortcut icon" href="{{ static_url('favicon.ico') }}">
 
 </head>
 <body>
@@ -347,14 +348,10 @@
 
 
 
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/vmaig.js"></script>
-<script src="/static/js/excanvas.js"></script>
-<script src="/static/js/jquery.tagcanvas.js"></script>
-
-<script type="text/javascript">
-
- </script>
+<script src="{{ static_url('js/jquery.min.js') }}"></script>
+<script src="{{ static_url('js/bootstrap.min.js') }}"></script>
+<script src="{{ static_url('js/vmaig.js') }}"></script>
+<script src="{{ static_url('js/excanvas.js') }}"></script>
+<script src="{{ static_url('js/jquery.tagcanvas.js') }}"></script>
 </body>
 </html>

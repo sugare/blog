@@ -41,11 +41,9 @@ class Application(tornado.web.Application):
         super(Application,self).__init__(handlers, **settings)
 
 
-
-
-
 class BaseHandler(tornado.web.RequestHandler):
     pass
+
 
 class IndexHandler(BaseHandler):
     def get(self):
@@ -101,7 +99,7 @@ class DateHandler(BaseHandler):
 
 class ErrorHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
-        self.write_error(404)
+        self.render('404.html')
 
 def main():
     tornado.options.parse_command_line()

@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block leftbar %}
-<div id="tool" class="well alert clearfix fade in">
+<div id="tool" class="well clearfix">
     <div class="tags">
-        <!--<span class="close" data-dismiss="alert">&times;</span>-->
         <div class="tag-list" style="float:left">
 
             <label class="active">
@@ -21,12 +20,11 @@
     </div>
 </div>
 
-<div class="well alert fade in">
+<div class="well">
     <div id="all-post-list">
 
         {% for i in dataPool %}
             <div id="div{{ i.id }}" class="all-post clearfix fade in underline">
-                <!--<span class="close" data-toggle="alert" data-dismiss="alert" data-target="#div{{ i.id }}">&times;</span>-->
                 <div class="post-title clearfix">
                     <a href="">
                         <div class="pre-cat">
@@ -67,7 +65,6 @@
             </div>
         {% end %}
     </div>
-    <!--<span class="close" data-dismiss="alert">&times;</span>-->
 
 </div>
 
@@ -76,6 +73,7 @@
 {% end %}
 
 {% block rightbar %}
+
 <div id="vmaig-hotest-posts">
     <div class="panel panel-vmaig">
         <div class="panel-heading">

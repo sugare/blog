@@ -1,0 +1,19 @@
+<div id="tool" class="well clearfix">
+    <div class="tags">
+        <div class="tag-list" style="float:left">
+
+            <label class="active">
+                全部
+                <input name="category" value="all" style="display:none" type="radio">
+            </label>
+
+            {% for i in indexTag %}
+                <label class="">
+                    {{ i }}
+                    <input name="category" value="{{ i }}" style="display:none" type="radio">
+                </label>
+            {% end %}
+
+        </div>
+    </div>
+</div>
