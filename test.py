@@ -22,7 +22,7 @@ import tornado.httpserver
 import tornado.options
 import os
 from lib.orm import rightbarDate, rightbarHot, indexTag, PagerPerItem, PagerTotalItem
-
+from tornado.auth import OAuth2Mixin
 
 from tornado.options import define, options
 define("port", default=8899, help="run on the given port", type=int)
